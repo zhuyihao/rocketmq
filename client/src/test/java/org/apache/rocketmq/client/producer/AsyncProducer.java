@@ -15,10 +15,21 @@ public class AsyncProducer {
     public static void main(String[] args) throws Exception {
         //Instantiate with a producer group name.
         DefaultMQProducer producer = new DefaultMQProducer("please_rename_unique_group_name");
+
+
+        // Specify name server addresses.
+        producer.setNamesrvAddr("localhost:9876");
+
+
+        //防止代码在调试过程中的各种超时
+        producer.setSendMsgTimeout(1000000000);
+        producer.setRetryTimesWhenSendAsyncFailed(0);
+
         //Launch the instance.
         producer.start();
-        producer.setRetryTimesWhenSendAsyncFailed(0);
-        for (int i = 0; i < 100; i++) {
+
+
+        for (int i = 0; i < 1; i++) {
             final int index = i;
             //Create a message instance, specifying topic, tag and message body.
             Message msg = new Message("TopicTest",
@@ -38,6 +49,8 @@ public class AsyncProducer {
                 }
             });
         }
+
+        Thread.sleep(10000000000L);
         //Shut down once the producer instance is not longer in use.
         producer.shutdown();
     }

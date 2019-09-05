@@ -91,6 +91,9 @@ public class DefaultMQProducerTest {
 
         producer.start();
 
+
+        Thread.sleep(100000000000L);
+
         Field field = DefaultMQProducerImpl.class.getDeclaredField("mQClientFactory");
         field.setAccessible(true);
         field.set(producer.getDefaultMQProducerImpl(), mQClientFactory);

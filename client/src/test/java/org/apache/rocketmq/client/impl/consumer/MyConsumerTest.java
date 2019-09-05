@@ -40,6 +40,8 @@ public class MyConsumerTest {
             }
         });
         consumer.start();
+
+//        consumer.sendMessageBack();
     }
 
 
